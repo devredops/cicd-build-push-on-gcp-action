@@ -1,0 +1,57 @@
+name: 'cicd-build-push-action-on-gcp'
+description: 'Action to build and push on GCR the artifact'
+author: 'lelered'
+
+inputs:
+  release-version:
+    description: "Release version"
+    required: true
+  gcr-auth-json:
+    description: 'Json credential Key for Google auth login.'
+    required: true
+  gcr-domain:
+    description: 'GCR Domain (for example: "europe-west4-docker.pkg.dev").'
+    required: true
+  gcr-path:
+    description: ''
+    required: true
+
+
+outputs:
+  image-gcr-url:
+    description: ""
+    value: "https://${{ inputs.gcr-domain }}/${{ inputs.gcr-path }}"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        submodules: true
+        # token: ${{ secrets.BUNDLE_GITHUB_COM }}
+
+    - name: Setup Google auth
+      id: auth
+      uses: google-github-actions/auth@v2
+      with:
+        credentials_json: ${{ inputs.gcr-auth-json }}
+
+    - name: Setup docker
+      uses: docker/setup-buildx-action@v3
+
+    - name: Authenticate docker
+      shell: bash
+      run: |
+        gcloud auth configure-docker --quiet ${{ inputs.gcr-domain }}
+
+    - name: Build and push
+      uses: docker/build-push-action@v6
+      with:
+        context: .
+        push: true
+        tags: |
+          ${{ inputs.gcr-domain }}/${{ inputs.gcr-path }}:${{github.sha}}
+          ${{ inputs.gcr-domain }}/${{ inputs.gcr-path }}:${{inputs.release-version}}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
