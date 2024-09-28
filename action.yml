@@ -10,7 +10,7 @@ inputs:
     description: 'Json credential Key for Google auth login.'
     required: true
   gcr-domain:
-    description: 'GCR Domain (for example: "europe-west4-docker.pkg.dev").'
+    description: 'Registry Domain (for example: "europe-west4-docker.pkg.dev").'
     required: true
   gcr-path:
     description: ''

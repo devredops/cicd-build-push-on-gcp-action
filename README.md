@@ -38,7 +38,7 @@ gcr-path: 'my-gcp-project/my-repo'
 
 ## Outputs
 
-### `image-gcr-url`
+### `image-gcp-url`
 The full URL of the Docker image pushed to GCR.
 
 Example output:
@@ -50,7 +50,7 @@ https://europe-west4-docker.pkg.dev/my-gcp-project/my-repo/devredops/cicd-build-
 
 Below is an example of how to use this action in a GitHub workflow:
 ```yaml
-name: Build and Push to GCR
+name: Build and Push to GCP
 
 on:
   push:
@@ -65,8 +65,8 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Build and Push Docker Image to GCR
-      uses: lelered/cicd-build-push-action-on-gcp@v1
+    - name: Build and Push Docker Image to GCP
+      uses: devredops/cicd-build-push-action-on-gcp@v1
       with:
         release-version: '1.0.0'
         gcr-auth-json: ${{ secrets.GCR_AUTH_JSON }}
