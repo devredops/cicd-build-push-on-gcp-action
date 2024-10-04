@@ -1,4 +1,4 @@
-# cicd-build-push-action-on-gcp
+# cicd-build-push-on-gcp-action
 This GitHub Action is designed to build and push an artifact to Google Container Registry (GCR). It simplifies the CI/CD process for deploying containerized applications on Google Cloud Platform (GCP).
 
 
@@ -43,7 +43,7 @@ The full URL of the Docker image pushed to GCR.
 
 Example output:
 ```
-https://europe-west4-docker.pkg.dev/my-gcp-project/my-repo/devredops/cicd-build-push-action-on-gcp
+https://europe-west4-docker.pkg.dev/my-gcp-project/my-repo/devredops/cicd-build-push-on-gcp-action
 ```
 
 ## Usage
@@ -66,7 +66,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Build and Push Docker Image to GCP
-      uses: devredops/cicd-build-push-action-on-gcp@v1
+      uses: devredops/cicd-build-push-on-gcp-action@v1
       with:
         release-version: '1.0.0'
         gcr-auth-json: ${{ secrets.GCR_AUTH_JSON }}

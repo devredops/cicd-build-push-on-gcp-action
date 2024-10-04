@@ -1,4 +1,4 @@
-name: 'cicd-build-push-action-on-gcp'
+name: 'cicd-build-push-on-gcp-action'
 description: 'Action to build and push on GCR the artifact'
 author: 'lelered'
 
