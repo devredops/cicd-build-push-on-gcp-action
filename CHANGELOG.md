@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.1.0](https://github.com/devredops/cicd-build-push-on-gcp-action/compare/v1.0.0...v1.1.0) (2025-08-29)
+
+
+### Features
+
+* build-args ([cf72f4f](https://github.com/devredops/cicd-build-push-on-gcp-action/commit/cf72f4f3acd217a1829d7607f86a82e2c6e7a786))
+
+
+### Bug Fixes
+
+* intro .gitignore ([4f3697f](https://github.com/devredops/cicd-build-push-on-gcp-action/commit/4f3697fd2fcfb79520dee38ba97add5398665232))
+
 ## 1.0.0 (2024-09-27)
 
 
