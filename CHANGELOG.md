@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/devredops/cicd-build-push-on-gcp-action/compare/v2.0.0...v2.1.0) (2025-11-08)
+
+
+### Features
+
+* JSON array of additional build targets with postfix ([7a2149f](https://github.com/devredops/cicd-build-push-on-gcp-action/commit/7a2149fa074147af41ace45de67da6bf336913e3))
+
 ## [2.0.0](https://github.com/devredops/cicd-build-push-on-gcp-action/compare/v1.1.0...v2.0.0) (2025-08-29)
 
 
