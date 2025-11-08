@@ -21,6 +21,10 @@ inputs:
   build-args:
     description: ''
     required: false
+  additional-targets:
+    description: 'JSON array of additional build targets with postfix (e.g. ["migrations", "worker"])'
+    required: false
+    default: '[]'
 
 
 outputs:
@@ -66,3 +70,24 @@ runs:
           ${{ inputs.gcr-domain }}/${{ inputs.gcr-path }}:${{inputs.release-version}}
         cache-from: type=gha
         cache-to: type=gha,mode=max
+    -
+      name: Build and push additional targets
+      if: inputs.additional-targets != '[]'
+      shell: bash
+      run: |
+        targets='${{ inputs.additional-targets }}'
+        echo "Processing targets: $targets"
+        
+        # Itera su ogni target nell'array JSON
+        for target in $(echo "$targets" | jq -r '.[]'); do
+          echo "Building target: $target"
+          
+          docker buildx build \
+            ${{ inputs.build-args && format('--build-arg {0}', inputs.build-args) || '' }} \
+            --target "$target" \
+            --tag "${{ inputs.gcr-domain }}/${{ inputs.gcr-path }}:${{ inputs.release-version }}-$target" \
+            --push \
+            --cache-from type=gha \
+            --cache-to type=gha,mode=max \
+            .
+        done
